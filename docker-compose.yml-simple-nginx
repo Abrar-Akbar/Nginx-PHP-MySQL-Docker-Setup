@@ -1,0 +1,9 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    container_name: nginx
+    restart: always # the container automatically restarts if it crashes or the Docker daemon restarts.
+    #restart: unless-stopped # the container will always restart unless it's manually stopped. (OLD)
