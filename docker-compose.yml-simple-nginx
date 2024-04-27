@@ -6,4 +6,4 @@ services:
       - "80:80"
     container_name: nginx
     restart: always # the container automatically restarts if it crashes or the Docker daemon restarts.
-    #restart: unless-stopped # the container will always restart unless it's manually stopped. (OLD)
+    #restart: unless-stopped # the container will always restart unless it's manually stopped. (OLD version)
