@@ -1,6 +1,6 @@
 # Nginx-PHP-MySQL Docker Setup
 
-This repository contains a Docker setup for running a web application stack consisting of Nginx, PHP, and MySQL. It's designed to be easily deployable using Docker Compose.
+This repository contains a Docker setup for running a web application stack consisting of Nginx, PHP, MySQL, and Nginx Proxy Manager. It's designed to be easily deployable using Docker Compose.
 
 ## Features
 
@@ -18,12 +18,54 @@ Make sure you have Docker and Docker Compose installed on your system.
 1. Clone this repository:
 
    ```bash
-     git https://github.com/Abrar-Akbar/Nginx-PHP-MySQL-Docker-Setup.git
-   
+   git clone https://github.com/Abrar-Akbar/Nginx-PHP-MySQL-Docker-Setup.git
+   ```
+
 2. Navigate to the project directory:
 
    ```bash
-     cd nginx-php-mysql
+   cd nginx-php-mysql
+   ```
+
 3. Start the services using Docker Compose:
+
    ```bash
-    docker-compose up -d
+   docker-compose up -d
+   ```
+
+4. Access your application in a web browser at `http://localhost:8080`/ `http://serverIP:8080`.
+
+## Configuration
+
+- `docker-compose.yml`: Contains the configuration for Docker Compose, including services for Nginx, PHP, MySQL, and Nginx Proxy Manager.
+- `nginx/default.conf`: Nginx configuration file.
+- `nginx/Dockerfile`: Dockerfile for building custom Nginx image.
+- `www/html`: Directory for your PHP application code.
+
+## Directory Structure
+
+- `data`: Data directory for Nginx Proxy Manager.
+- `letsencrypt`: Directory for Let's Encrypt SSL certificates.
+- `mysql`: Directory containing MySQL configuration and secrets.
+- `nginx`: Directory containing Nginx configuration files and Dockerfile.
+- `www/html`: Directory for your PHP application code.
+
+## Nginx Proxy Manager
+
+- Nginx Proxy Manager is included as a service in the `docker-compose.yml` file.
+- It is used for managing reverse proxy configurations and SSL certificates.
+- Access the Nginx Proxy Manager dashboard in a web browser at `http://localhost:81` / `https://serverIP:81` after starting the services.
+
+## Secrets (Confidentials)
+
+Secrets for MySQL credentials are stored in the `mysql` directory (Don't be push on GitHUb for publically)
+
+## Additional Notes
+
+- Make sure to adjust configurations according to your application requirements.
+- For SSL certificates, Nginx Proxy Manager is configured to use Let's Encrypt. You can customize SSL configurations as needed.
+
+## Credits
+
+This project setup is inspired by [docker-compose.yml](docker-compose.yml) provided by [Abrar Akbar](https://github.com/Abrar-Akbar).
+
