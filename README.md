@@ -22,7 +22,8 @@ Make sure you have Docker and Docker Compose installed on your system.
    
 2. Navigate to the project directory:
 
+   ```bash
      cd nginx-php-mysql
 3. Start the services using Docker Compose:
-
+   ```bash
     docker-compose up -d
