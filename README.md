@@ -39,7 +39,7 @@ Make sure you have Docker and Docker Compose installed on your system.
 
 - `docker-compose.yml`: Contains the configuration for Docker Compose, including services for Nginx, PHP, MySQL, and Nginx Proxy Manager.
 - `nginx/default.conf`: Nginx configuration file.
-- `nginx/Dockerfile`: Dockerfile for building custom Nginx image.
+- `nginx/Dockerfile`: Dockerfile for building custom Nginx images.
 - `www/html`: Directory for your PHP application code.
 
 ## Directory Structure
@@ -56,9 +56,9 @@ Make sure you have Docker and Docker Compose installed on your system.
 - It is used for managing reverse proxy configurations and SSL certificates.
 - Access the Nginx Proxy Manager dashboard in a web browser at `http://localhost:81` / `https://serverIP:81` after starting the services.
 
-## Secrets (Confidentials)
+## Secrets (Confidential)
 
-Secrets for MySQL credentials are stored in the `mysql` directory (Don't be push on GitHUb for publically)
+Secrets for MySQL credentials are stored in the `mysql` directory (Don't be pushed on GitHub publically)
 
 ## Additional Notes
 
@@ -67,5 +67,5 @@ Secrets for MySQL credentials are stored in the `mysql` directory (Don't be push
 
 ## Credits
 
-This project setup is inspired by [docker-compose.yml](docker-compose.yml) provided by [Abrar Akbar](https://github.com/Abrar-Akbar).
+This project setup is inspired by [docker-compose.yml] provided by [Abrar Akbar](https://github.com/Abrar-Akbar).
 
