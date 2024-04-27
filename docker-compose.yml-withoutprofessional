@@ -44,4 +44,4 @@ networks:
   nginx-php:
     driver: bridge
 volumes:
-  mysql-data:
+  mysql-data: # Host volume
