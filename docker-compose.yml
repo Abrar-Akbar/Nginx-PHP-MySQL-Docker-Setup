@@ -1,0 +1,64 @@
+version: '3.8'
+
+# Definition of custom networks
+networks:
+  backend:  # Backend network for internal communication between services
+    driver: bridge
+  frontend:  # Frontend network for serving client requests
+    driver: bridge
+
+# Definition of services
+services:
+  nginx:
+    build: 
+      context: ./nginx/
+      dockerfile: Dockerfile
+    container_name: nginx-container
+    volumes:
+      - ./www/html:/var/www/html  # Mount application code from host to container
+    ports:
+      - "8080:80"
+    networks:
+      - frontend  # Connect Nginx to the frontend network for serving client requests
+      - backend   # Connect Nginx to the backend network for internal communication
+    restart: always  # Ensure Nginx container restarts automatically on failure
+
+  php:  # PHP-FPM service for processing PHP requests
+    image: php:7.4-fpm 
+    container_name: php-container 
+    volumes:
+      - ./www/html:/var/www/html  # Mount application code from host to container
+    networks:
+      - backend  # Connect PHP-FPM to the backend network for internal communication
+    restart: always
+
+  mysql:  # MySQL service for database storage
+    image: mysql:5.7
+    container_name: mysql-container
+    environment:  
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password  # Set MySQL root password from secret file within container
+      MYSQL_DATABASE: my_database
+      MYSQL_USER: my_user
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password  # Set MySQL user password from secret file within container
+    networks:
+      - backend  # Connect MySQL to the backend network for internal communication
+    restart: always
+    secrets:  # Define secrets for MySQL credentials
+      - db_root_password 
+      - db_password      
+  nginx_proxy_manager:  # New service for Nginx Proxy Manager
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+# Definition of secrets
+secrets:
+  db_root_password: 
+    file: ./mysql/db_root_password.txt  # Path to the secret file containing MySQL root password
+  db_password:      
+    file: ./mysql/db_password.txt        # Path to the secret file containing MySQL user password
